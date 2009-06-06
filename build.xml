@@ -10,15 +10,11 @@
 	<property name="src.dir" value="${home.dir}/src"/>
 	<property name="dist.dir" value="${home.dir}/dist"/>
 	<property name="docs.dir" value="${home.dir}/docs"/>
-	<property name="libs.dir" value="${home.dir}/libs"/>
 	<property name="jar.name" value="Base64.jar"/>
 	<property environment="env"/>
 
 	
 	<path id="classpath">
-        <fileset dir="${libs.dir}">
-            <include name="**/*.jar" />
-        </fileset>
 	</path>
 
 	<target name="all" depends="build"/>
