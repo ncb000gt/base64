@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project name="base64" default="all" basedir=".">
+    <!-- =================================================================== -->
+    <!-- Initializes some variables                                          -->
+    <!-- =================================================================== -->
+	
+    <property name="project" value="base64"/>
+	<property name="home.dir" value="."/>
+	<property name="build.dir" value="${home.dir}/build"/>
+	<property name="src.dir" value="${home.dir}/src"/>
+	<property name="dist.dir" value="${home.dir}/dist"/>
+	<property name="docs.dir" value="${home.dir}/docs"/>
+	<property name="libs.dir" value="${home.dir}/libs"/>
+	<property name="jar.name" value="Base64.jar"/>
+	<property environment="env"/>
+
+	
+	<path id="classpath">
+        <fileset dir="${libs.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+	</path>
+
+	<target name="all" depends="build"/>
+	
+	<target name="init">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.dir}/classes"/>
+    </target>
+	
+	<target name="clean">
+		<delete file="${dist.dir}/${jar.name}"/>
+		<delete dir="${build.dir}"/>
+		<delete dir="${docs.dir}"/>
+	</target>
+
+	<target name="build" depends="clean, init">
+		<antcall target="jar"/>
+		<antcall target="jsdoc"/>
+		<antcall target="javadoc"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<property name="deprecation" value="off"/>
+		<property name="debug" value="on"/>
+        <property name="optimize" value="on"/>
+		<property name="encoding" value="utf-8" /> 
+
+		<javac srcdir="${src.dir}"
+ 			encoding="${encoding}"
+	    	destdir="${build.dir}/classes"
+            debug="${debug}"
+            deprecation="${deprecation}"
+            optimize="${optimize}">
+            <classpath refid="classpath" />
+        </javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar jarfile="${dist.dir}/${jar.name}" basedir="${build.dir}/classes"/>
+	</target>
+
+	<target name="docs">
+		<javadoc sourcepath="${src.dir}" 
+			destdir="${docs.dir}" 
+			packagenames="*" 
+			classpathref="classpath"/>
+	</target>
+
+</project>

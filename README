@@ -1,0 +1,12 @@
+base64
+--------------
+
+base64 is a set of classes to allow encoding/decoding of data to/from base64.
+
+
+Notes
+--------------
+
+Initial work done by Robert Harder (http://iharder.sourceforge.net/current/java/base64/).
+
+I'll try to keep the separate source repositories as up to date as possible.
